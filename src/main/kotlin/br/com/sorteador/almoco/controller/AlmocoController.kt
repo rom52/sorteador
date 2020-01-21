@@ -17,6 +17,10 @@ class AlmocoController{
       return almocoRepository.findAll().toList()
     }
 
+    @GetMapping("{id}")
+    fun listById(@PathVariable id: Long) = almocoRepository.findById(id)
+
+
     @PostMapping
     fun add(@RequestBody restaurante: Restaurante): Restaurante {
         return almocoRepository.save(restaurante)

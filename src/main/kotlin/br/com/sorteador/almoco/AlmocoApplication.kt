@@ -9,3 +9,4 @@ class AlmocoApplication
 fun main(args: Array<String>) {
 	runApplication<AlmocoApplication>(*args)
 }
+
