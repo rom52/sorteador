@@ -14,16 +14,28 @@ class AlmocoController{
 
     @GetMapping
     fun list(): List<Restaurante>{
-        return almocoRepository.findAll().toList()
-
+      return almocoRepository.findAll().toList()
     }
 
     @PostMapping
     fun add(@RequestBody restaurante: Restaurante): Restaurante {
         return almocoRepository.save(restaurante)
+    }
 
+    @PutMapping("{id}")
+    fun alter(@PathVariable id: Long, @RequestBody restaurante: Restaurante): Restaurante{
+        if (almocoRepository.existsById(id)){
+            val safeNote = restaurante.copy(id)
+            return almocoRepository.save(safeNote)
+        }
+        return Restaurante()
+    }
 
-
+    @DeleteMapping("{id}")
+    fun delete(@PathVariable id: Long){
+        if(almocoRepository.existsById(id)){
+            almocoRepository.deleteById(id)
+        }
     }
 
 }
